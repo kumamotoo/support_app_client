@@ -1,0 +1,18 @@
+.container {
+  overflow: auto;
+  position: relative;
+  width: 98%;
+  height: calc(100vh - 7.5rem);
+  margin: 2rem 0;
+  border-radius: 20px;
+  background: var(--light-bg);
+}
+
+i {
+  font-size: 1.4rem;
+  color: #e51515;
+
+  &.resolved {
+    color: var(--green-color);
+  }
+}

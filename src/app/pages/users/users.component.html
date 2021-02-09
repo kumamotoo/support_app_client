@@ -1,0 +1,57 @@
+<div class="list" *ngIf="users.length; else noData">
+  <app-count>Users count: {{ users.length }}</app-count>
+  <table>
+    <thead>
+      <tr [formGroup]="searchInputs">
+        <th>Id</th>
+        <th [class.active]="showField.name">
+          Name
+          <i class="material-icons search-icon" (click)="search('name')">
+            search
+          </i>
+          <input formControlName="name" type="text" *ngIf="showField.name" />
+        </th>
+        <th [class.active]="showField.email">
+          E-mail
+          <i class="material-icons search-icon" (click)="search('email')">
+            search
+          </i>
+          <input formControlName="email" type="text" *ngIf="showField.email" />
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users" (click)="findOne(user.id)">
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>
+          {{ user.email }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="user-details" *ngIf="user">
+    <div class="card">
+      <h4>User information:</h4>
+      <ul>
+        <li><strong>Id: </strong> {{ user.id }}</li>
+        <li><strong>User: </strong> {{ user.name | titlecase }}</li>
+        <li><strong>User Email: </strong> {{ user.email }}</li>
+      </ul>
+    </div>
+    <div class="card" *ngIf="userRooms.length">
+      <h4>User's rooms information:</h4>
+      <ul [class.rooms]="userRooms.length > 1" *ngFor="let room of userRooms">
+        <li><strong>Room Id: </strong> {{ room.id }}</li>
+        <li>
+          <strong>Admin: </strong> {{ room.admin.name }} |
+          {{ room.admin.email }}
+        </li>
+        <li><strong>Resolved: </strong> {{ room.resolved }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<ng-template #noData>
+  <app-no-data>There is not any Users data yet.</app-no-data>
+</ng-template>

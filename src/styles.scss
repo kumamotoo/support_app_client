@@ -1,1 +1,180 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+:root {
+  --primary-color: #f6da85;
+  --dark-color: #2c2a2e;
+  --gray-color: #bcbec2;
+  --light-color: #fefefe;
+  --light-bg: #f3f6fb;
+  --header-height: 3.5rem;
+  --menu-width: 15rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+}
+
+ul {
+  list-style: none;
+  width: 100%;
+}
+
+a {
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+button {
+  letter-spacing: 0.02rem;
+
+  &.disabled {
+    background-color: var(--gray-color) !important;
+    cursor: not-allowed !important;
+    color: var(--dark-color) !important;
+    &:hover {
+      background-color: var(--gray-color) !important;
+      cursor: not-allowed !important;
+      color: var(--dark-color) !important;
+    }
+  }
+
+  &.btn {
+    padding: 0.7rem 1rem;
+    background-color: var(--gray-color);
+    color: var(--dark-color);
+    border: none;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgb(212, 212, 212);
+    }
+  }
+
+  &.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+    &:hover {
+      background-color: var(--dark-color);
+      color: var(--primary-color);
+    }
+  }
+
+  &.btn-block {
+    display: block;
+    width: 100%;
+  }
+}
+
+.line {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  margin: 3.5rem auto 3rem;
+}
+
+table {
+  width: 96%;
+  margin: 2rem;
+  border-radius: 10px;
+  border-spacing: 0rem;
+  border-collapse: separate;
+  background: #fff;
+  overflow: hidden;
+
+  td,
+  th {
+    text-align: center;
+    padding: 0.7rem 1rem;
+    max-width: 10rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    border-bottom: 4px solid var(--light-bg);
+  }
+  tbody {
+    tr {
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:last-child {
+        td {
+          border-bottom: none;
+        }
+      }
+
+      &:hover {
+        background: var(--dark-color);
+        color: var(--light-color);
+      }
+    }
+  }
+
+  thead {
+    font-size: 1.1rem;
+    color: var(--gray-color);
+
+    th {
+      position: relative;
+      .search-icon {
+        color: var(--gray-color);
+        position: absolute;
+        right: 0;
+        cursor: pointer;
+        visibility: hidden;
+      }
+
+      .sort-date {
+        position: absolute;
+        top: 10px;
+        font-size: 1.4rem;
+        color: var(--gray-color);
+        cursor: pointer;
+      }
+
+      input {
+        position: absolute;
+        right: 2.3rem;
+        top: 9px;
+        width: 80%;
+        padding: 4px 5px;
+        outline: none;
+        border: 1px solid var(--gray-color);
+        border-radius: 5px;
+      }
+
+      &:hover,
+      &.active {
+        input {
+          right: 2.3rem;
+        }
+        .search-icon {
+          visibility: visible;
+        }
+      }
+    }
+  }
+}

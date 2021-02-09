@@ -1,0 +1,57 @@
+.admin-selector {
+  margin: 0.5rem auto;
+  width: 90%;
+  display: grid;
+  grid-template-areas: "select";
+  align-items: center;
+  border: 1px solid #d6d4d4;
+  border-radius: 5px;
+  padding: 0.4rem 0.5em;
+  font-size: 1rem;
+  cursor: pointer;
+  line-height: 1.1;
+  color: #d6d4d4;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+  position: relative;
+  outline: none;
+
+  &::after {
+    grid-area: select;
+    justify-self: end;
+    content: "";
+    width: 0.8em;
+    height: 0.5em;
+    background-color: #777;
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+  }
+
+  select {
+    grid-area: select;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+    outline: none;
+    color: #777;
+
+    &::-ms-expand {
+      display: none;
+    }
+
+    &:focus + .focus {
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      bottom: -1px;
+      border: 2px solid #ccc;
+      border-radius: inherit;
+    }
+  }
+}

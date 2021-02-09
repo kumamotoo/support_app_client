@@ -1,0 +1,52 @@
+<div class="menu">
+  <div class="line"></div>
+  <header>
+    <a
+      [routerLink]="['']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <h1>Support</h1>
+      <img src="../../assets/images/support.svg" alt="Support Icon" />
+    </a>
+  </header>
+  <main>
+    <ul>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a [routerLink]="['']">
+          <i class="material-icons">dashboard</i>Dashboard</a
+        >
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="['/rooms']">
+          <i class="material-icons"> room_preferences </i>Rooms</a
+        >
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="['/requests']">
+          <i class="material-icons"> mark_chat_unread </i>Requests
+        </a>
+      </li>
+      <li routerLinkActive="active" *ngIf="person.role !== 'user'">
+        <a [routerLink]="['/users']">
+          <i class="material-icons"> people </i>Users
+        </a>
+      </li>
+      <li (click)="showMore()" routerLinkActive="active">
+        <a>
+          <i class="material-icons"> {{ icon }} </i>More
+        </a>
+      </li>
+      <li class="more-item" *ngIf="more" routerLinkActive="active">
+        <a [routerLink]="['/profile']">
+          <i class="material-icons"> admin_panel_settings </i>Profile
+        </a>
+      </li>
+      <li class="more-item" *ngIf="more" routerLinkActive="active">
+        <a [routerLink]="['/create']" *ngIf="person.role !== 'user'">
+          <i class="material-icons"> add_circle </i>Create Admin
+        </a>
+      </li>
+    </ul>
+  </main>
+</div>

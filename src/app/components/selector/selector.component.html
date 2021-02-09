@@ -1,0 +1,9 @@
+<div class="admin-selector">
+  <select (change)="select($event.target.value)">
+    <option disabled selected value="" hidden>Select the Admin</option>
+    <option *ngFor="let admin of admins" [value]="admin.id">
+      {{ admin.name }}
+    </option>
+  </select>
+  <span class="focus"></span>
+</div>

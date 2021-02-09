@@ -1,0 +1,98 @@
+<div class="container" *ngIf="room; else loader">
+  <header>
+    <div class="title">
+      <h3>
+        <strong>Title: </strong> {{ room?.title | slice: 0:100 }}
+        {{ room?.title.length > 100 && "..." }}
+      </h3>
+    </div>
+    <div class="search">
+      <input type="text" placeholder="Search..." />
+      <i class="material-icons"> search </i>
+    </div>
+  </header>
+  <div class="content">
+    <div class="chat">
+      <ul #scroll *ngIf="messages.length; else noMessages">
+        <li
+          [class.isMe]="message.sender === person?.id"
+          *ngFor="let message of messages"
+        >
+          {{ message.message }}
+          <span> {{ message.createdAt | date: "hh:mm a" }}</span>
+        </li>
+      </ul>
+      <ng-template #noMessages>
+        <div class="no-messages">
+          You don't have messages with {{ room.user.name | titlecase }}.
+        </div>
+      </ng-template>
+      <form [formGroup]="form" (ngSubmit)="sendMessage()">
+        <input
+          type="text"
+          formControlName="messageText"
+          placeholder="Type your message here..."
+        />
+        <button type="submit" class="send-message">
+          <i class="material-icons"> forward_to_inbox </i>
+        </button>
+      </form>
+    </div>
+    <div class="info">
+      <div class="card">
+        <h4>Room information:</h4>
+        <ul>
+          <li><strong>Id: </strong> {{ room?.id }}</li>
+          <li><strong>User: </strong> {{ room?.user.name | titlecase }}</li>
+          <li><strong>User Email: </strong> {{ room?.user.email }}</li>
+          <li><strong>Admin: </strong> {{ room?.admin.name | titlecase }}</li>
+          <li><strong>Admin Email: </strong> {{ room?.admin.email }}</li>
+          <li>
+            <strong>Created At: </strong>
+            {{ room?.createdAt | date: "dd-MM-yyyy, hh:mm a" }}
+          </li>
+          <li>
+            <strong>Resolved:</strong>
+            <i
+              class="material-icons resolved"
+              *ngIf="room?.resolved; else unresolved"
+            >
+              check
+            </i>
+            <ng-template #unresolved>
+              <i class="material-icons"> close </i>
+            </ng-template>
+          </li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Request information:</h4>
+        <div class="description">
+          <p>
+            <strong>Request title:</strong>
+            <span> {{ room?.title }} </span>
+          </p>
+
+          <p>
+            <strong>Request description:</strong>
+            <span>
+              {{ room?.description }}
+            </span>
+          </p>
+        </div>
+      </div>
+      <div class="buttons" *ngIf="person.role !== 'user'">
+        <button class="btn" (click)="close()">
+          {{ room.open ? "Close" : "Reopen" }}
+        </button>
+        <button class="btn btn-primary" (click)="resolve()">
+          {{ room.resolved ? "Unresolve" : "Resolve" }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

@@ -1,0 +1,17 @@
+<div class="container">
+  <alert></alert>
+  <form [formGroup]="from" (ngSubmit)="onSubmit()">
+    <h2>Create request</h2>
+    <input type="text" formControlName="title" placeholder="Title" />
+    <textarea
+      type="text"
+      formControlName="description"
+      placeholder="Description"
+    ></textarea>
+    <button type="submit" *ngIf="isUser; else isAdmin">Create</button>
+  </form>
+
+  <ng-template #isAdmin>
+    <p>Only users with role "user" can create requests.</p>
+  </ng-template>
+</div>

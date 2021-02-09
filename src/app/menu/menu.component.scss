@@ -1,0 +1,70 @@
+.menu {
+  width: var(--menu-width);
+
+  .line {
+    background-color: #ccc;
+  }
+
+  header {
+    height: var(--header-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary-color);
+
+    a {
+      justify-content: center;
+    }
+
+    h1 {
+      font-size: 2.3rem;
+    }
+
+    img {
+      width: 2.7rem;
+      margin-left: 0.6rem;
+    }
+  }
+
+  ul {
+    margin-top: 2rem;
+  }
+
+  li {
+    cursor: pointer;
+    letter-spacing: 0.02rem;
+    color: var(--gray-color);
+    position: relative;
+    margin-bottom: 0.3rem;
+
+    a {
+      padding: 0.9rem 2rem;
+    }
+
+    i {
+      padding-right: 0.5rem;
+    }
+
+    &:hover {
+      color: var(--light-color);
+      background: var(--gray-color);
+      width: 85%;
+      border-radius: 0px 7px 7px 0;
+    }
+
+    &.active {
+      color: var(--light-color);
+      background: var(--dark-color);
+      width: 85%;
+      border-radius: 0px 7px 7px 0;
+    }
+
+    &.more-item {
+      padding-left: 1.8rem;
+
+      & a:last-child {
+        padding-right: 0.5rem;
+      }
+    }
+  }
+}

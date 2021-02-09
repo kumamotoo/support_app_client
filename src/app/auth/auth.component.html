@@ -1,0 +1,32 @@
+<div class="container">
+  <alert></alert>
+  <form
+    *ngIf="isLogin; else reqister"
+    [formGroup]="loginForm"
+    (ngSubmit)="submit('login')"
+  >
+    <h2>Log In</h2>
+    <input type="text" placeholder="E-mail" formControlName="email" />
+    <input type="password" placeholder="Password" formControlName="password" />
+    <button type="submit">Log In</button>
+    <a (click)="toLogin(false)">
+      <i class="material-icons"> forward </i> to the Sign Up
+    </a>
+  </form>
+  <ng-template #reqister>
+    <form [formGroup]="registerForm" (ngSubmit)="submit('register')">
+      <h2>Sign Up</h2>
+      <input type="text" placeholder="Name" formControlName="name" />
+      <input type="text" placeholder="E-mail" formControlName="email" />
+      <input
+        type="password"
+        placeholder="Password"
+        formControlName="password"
+      />
+      <button type="submit">Sign Up</button>
+      <a (click)="toLogin(true)">
+        <i class="material-icons"> forward </i> to the Log In
+      </a>
+    </form>
+  </ng-template>
+</div>

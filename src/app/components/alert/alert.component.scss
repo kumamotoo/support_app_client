@@ -1,0 +1,16 @@
+@import url("https://toert.github.io/Isolated-Bootstrap/versions/4.0.0-beta/iso_bootstrap4.0.0min.css");
+
+.bootstrap {
+  .alert {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .close {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    font-size: 2rem;
+  }
+}

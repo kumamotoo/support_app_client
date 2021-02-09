@@ -1,0 +1,37 @@
+<div class="wrapper">
+  <div class="container">
+    <alert></alert>
+    <header>
+      <div class="profile-image">
+        <img [src]="person?.image" />
+      </div>
+      <div class="profile-main-info">
+        <h3>{{ person?.name }}</h3>
+        <p>{{ person?.email }} - {{ person.role }}</p>
+      </div>
+    </header>
+    <form class="card" [formGroup]="form" (ngSubmit)="save()">
+      <h4>Account information</h4>
+      <ul>
+        <li>
+          <strong>Name: </strong>
+          <input formControlName="name" type="text" [value]="form.value.name" />
+        </li>
+        <li>
+          <strong>Email: </strong>
+          <input type="text" formControlName="email" />
+        </li>
+        <li><strong>Role: </strong> {{ person?.role }}</li>
+        <li>
+          <strong>Password: </strong>
+          <input formControlName="password" [type]="type" />
+          <span class="material-icons"> visbility </span>
+        </li>
+      </ul>
+      <div class="buttons">
+        <button type="button" class="btn">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,109 @@
+<alert></alert>
+<div class="list" *ngIf="requests.length; else noData">
+  <app-count>Requests count: {{ requests.length }}</app-count>
+  <table>
+    <thead>
+      <tr [formGroup]="searchInputs">
+        <th>Id</th>
+        <th [class.active]="showField.title">
+          Title
+          <i class="material-icons search-icon" (click)="search('title')">
+            search
+          </i>
+          <input formControlName="title" type="text" *ngIf="showField.title" />
+        </th>
+        <th [class.active]="showField.description">
+          Description
+          <i class="material-icons search-icon" (click)="search('description')">
+            search
+          </i>
+          <input
+            formControlName="description"
+            type="text"
+            *ngIf="showField.description"
+          />
+        </th>
+        <th [class.active]="showField.creator">
+          User
+          <i class="material-icons search-icon" (click)="search('creator')">
+            search
+          </i>
+          <input
+            formControlName="creator"
+            type="text"
+            *ngIf="showField.creator"
+          />
+        </th>
+        <th>
+          Created At
+          <i class="material-icons sort-date" (click)="search('createdAt')">
+            unfold_more
+          </i>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let request of requests" (click)="findOne(request.id)">
+        <td>{{ request?.id }}</td>
+        <td>{{ request?.title }}</td>
+        <td>
+          {{ request?.description }}
+        </td>
+        <td>
+          {{ request?.creator }}
+        </td>
+        <td>
+          {{ request?.createdAt | date: "YYYY-MM-dd" }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="create-room" *ngIf="request">
+    <div class="card">
+      <h4>Create room:</h4>
+      <ul>
+        <li><strong>title: </strong> {{ request.title | titlecase }}</li>
+        <li><strong>description: </strong> {{ request.description }}</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h4>User information:</h4>
+      <ul>
+        <li><strong>Id: </strong> {{ request.creator.id }}</li>
+        <li><strong>Name: </strong> {{ request.creator.name | titlecase }}</li>
+        <li><strong>Email: </strong> {{ request.creator.email }}</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h4>Admin information:</h4>
+      <app-selector (admin)="setAdmin($event)"></app-selector>
+      <ul *ngIf="admin">
+        <li><strong>Id: </strong> {{ admin.id }}</li>
+        <li><strong>Name: </strong> {{ admin.name | titlecase }}</li>
+        <li><strong>Email: </strong> {{ admin.email }}</li>
+      </ul>
+    </div>
+    <button
+      (click)="
+        createRoom({
+          title: request.title,
+          description: request.description,
+          user: request.creator.id,
+          admin: admin.id
+        })
+      "
+      class="btn create-room-btn"
+      [disabled]="!admin"
+      type="submit"
+    >
+      Create room
+    </button>
+  </div>
+</div>
+
+<ng-template #noData>
+  <app-no-data>You don't have any Requests yet. </app-no-data>
+</ng-template>

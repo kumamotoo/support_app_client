@@ -1,0 +1,22 @@
+<div class="content">
+  <header>
+    <div class="breadcrumbs">
+      <a [routerLink]="[breadcrumbsRoute]">
+        <span>{{ breadcrumbsTitle }}</span>
+      </a>
+      <span *ngIf="breadcrumbsId">
+        <i class="material-icons"> chevron_right </i>
+        {{ breadcrumbsId }}
+      </span>
+    </div>
+    <div class="chat-settings">
+      <a [routerLink]="['/profile']">
+        <span> {{ person.name }} </span>
+      </a>
+      <a (click)="logout()">
+        <i class="material-icons"> login </i>
+      </a>
+    </div>
+  </header>
+  <router-outlet></router-outlet>
+</div>

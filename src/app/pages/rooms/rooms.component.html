@@ -1,0 +1,71 @@
+<div class="container" *ngIf="rooms.length; else noData">
+  <app-count>Rooms count: {{ rooms.length }}</app-count>
+  <table>
+    <thead>
+      <tr [formGroup]="searchInputs">
+        <th>Id</th>
+        <th [class.active]="showField.title">
+          Title
+          <i class="material-icons search-icon" (click)="search('title')">
+            search
+          </i>
+          <input formControlName="title" type="text" *ngIf="showField.title" />
+        </th>
+        <th [class.active]="showField.description">
+          Description
+          <i class="material-icons search-icon" (click)="search('description')">
+            search
+          </i>
+          <input
+            formControlName="description"
+            type="text"
+            *ngIf="showField.description"
+          />
+        </th>
+        <th>Resolved</th>
+        <th>Open</th>
+        <th>
+          Created At
+          <i class="material-icons sort-date" (click)="search('createdAt')">
+            unfold_more
+          </i>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let room of rooms" (click)="findOne(room.id)">
+        <td>{{ room.id }}</td>
+        <td>{{ room.title }}</td>
+        <td>
+          {{ room.description }}
+        </td>
+        <td>
+          <i
+            class="material-icons resolved"
+            *ngIf="room?.resolved; else unresolved"
+          >
+            check_circle_outline
+          </i>
+          <ng-template #unresolved>
+            <i class="material-icons"> block </i>
+          </ng-template>
+        </td>
+        <td>
+          <span class="material-icons resolved" *ngIf="room?.open; else close">
+            lock_open
+          </span>
+          <ng-template #close>
+            <i class="material-icons"> lock </i>
+          </ng-template>
+        </td>
+        <td>
+          {{ room.createdAt | date: "YYYY-MM-dd" }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noData>
+  <app-no-data>You don't have any Rooms yet.</app-no-data>
+</ng-template>

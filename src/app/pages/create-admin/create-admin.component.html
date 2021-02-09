@@ -1,0 +1,32 @@
+<div class="wrapper">
+  <div class="container">
+    <alert></alert>
+    <header>
+      <h1>Create an Admin</h1>
+    </header>
+    <form class="card" [formGroup]="form" (ngSubmit)="create()">
+      <h4>Admin information</h4>
+      <ul>
+        <li>
+          <strong>Name: </strong>
+          <input formControlName="name" type="text" [value]="form.value.name" />
+        </li>
+        <li>
+          <strong>Email: </strong>
+          <input type="text" formControlName="email" />
+        </li>
+        <li>
+          <strong>Role: </strong> <input type="text" formControlName="role" />
+        </li>
+        <li>
+          <strong>Password: </strong>
+          <input formControlName="password" type="text" />
+        </li>
+      </ul>
+      <div class="buttons">
+        <button type="button" class="btn">Cancel</button>
+        <button type="submit" class="btn btn-primary">Create</button>
+      </div>
+    </form>
+  </div>
+</div>

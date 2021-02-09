@@ -1,0 +1,16 @@
+.container {
+  overflow: auto;
+  position: relative;
+  width: 98%;
+  height: calc(100vh - 7.5rem);
+  margin: 2rem 0;
+  border-radius: 20px;
+  background: var(--light-bg);
+  .no-data {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 1.5rem;
+  }
+}

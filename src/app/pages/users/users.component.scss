@@ -1,0 +1,76 @@
+.list {
+  display: flex;
+  width: 98%;
+  height: calc(100vh - 7.5rem);
+  margin: 2rem;
+  border-radius: 20px;
+  background: var(--light-bg);
+  overflow: auto;
+  position: relative;
+
+  .user-details {
+    position: sticky;
+    top: 0.01rem;
+    padding-top: 2rem;
+    width: 48rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .card {
+      min-height: 8rem;
+      overflow-y: auto;
+      margin: 0 2rem 1rem 0;
+      height: max-content;
+      background: var(--light-color);
+      border-radius: 10px;
+
+      h4 {
+        margin-bottom: 0.8rem;
+        font-size: 1.2rem;
+        color: var(--gray-color);
+        padding: 1rem 1rem 0 1rem;
+      }
+
+      strong {
+        pointer-events: none;
+        font-size: 0.8rem;
+        padding: 0 1rem;
+      }
+
+      .rooms {
+        border-bottom: 1rem solid var(--light-bg);
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+
+      li {
+        max-width: 30rem;
+        border-bottom: 4px solid var(--light-bg);
+        background: #fff;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        color: var(--dark-color);
+        padding: 0.7rem 0.7rem;
+        position: relative;
+        cursor: copy;
+        letter-spacing: 0.02rem;
+
+        &:last-child {
+          border: none;
+        }
+
+        i {
+          font-size: 1.1rem;
+          color: rgb(201, 37, 37);
+          &.resolved {
+            color: var(--green-color);
+          }
+        }
+      }
+    }
+  }
+}
