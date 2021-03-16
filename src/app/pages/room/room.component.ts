@@ -4,7 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { WebsocketService } from 'src/app/shared/socket.service';
 import { HttpService, Room } from '../../shared/http.service';
 import { SEND_MESSAGE, NEW_MESSAGE, ROOMS_URL } from '../../shared/constants';
-import { getPerson } from 'src/app/shared/helpers';
+import { getUser } from 'src/app/shared/helpers';
 
 @Component({
   selector: 'app-room',
@@ -16,7 +16,7 @@ export class RoomComponent implements OnInit {
   public messages = [];
   public room: Room;
   public form: FormGroup;
-  public person: any;
+  public user: any;
 
   constructor(
     private httpService: HttpService,
@@ -35,7 +35,7 @@ export class RoomComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.person = getPerson();
+    this.user = getUser();
 
     this.route.params.subscribe((param: Params) => {
       this.loadById(param.id);
@@ -60,7 +60,7 @@ export class RoomComponent implements OnInit {
     if (this.form.value.messageText.trim()) {
       const message = {
         message: this.form.value.messageText,
-        sender: this.person.id,
+        sender: this.user.id,
         admin: this.room.admin,
         room: this.room.id,
       };

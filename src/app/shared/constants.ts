@@ -4,7 +4,6 @@ export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const REQUEST_URL = 'requests';
 export const ROOMS_URL = 'room';
 export const USERS_URL = 'user';
-export const ADMINS_URL = 'admin';
 export const MESSAGES_URL = 'messages';
 
 export const LOGIN_URL = 'login';

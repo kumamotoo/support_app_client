@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Role } from './helpers';
 
 export interface User {
   email: string;
@@ -9,14 +10,14 @@ export interface User {
   image: string;
   name: string;
   password: string;
-  role: 'user';
+  role: Role;
   createdAt: string;
   updatedAt: string;
 }
 
 export interface Message {
   sender: string;
-  admin: Omit<Admin, 'id'>;
+  admin: Omit<User, 'id'>;
   room: string;
   message: string;
 }
@@ -25,7 +26,7 @@ export interface Room {
   id?: string;
   title: string;
   description: string;
-  admin: Admin;
+  admin: User;
   user: User;
   messages: any;
   open: boolean;
@@ -38,18 +39,7 @@ export interface Request {
   id?: string;
   title: string;
   description: string;
-  creator: Admin | User;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface Admin {
-  email: string;
-  id: string;
-  image: string;
-  name: string;
-  password: string;
-  role: 'admin' | 'super_admin';
+  creator: User;
   createdAt: string;
   updatedAt: string;
 }
@@ -83,6 +73,10 @@ export class HttpService {
 
   find(prefix: string) {
     return this.get(prefix);
+  }
+
+  findWhere(prefix: string, where: any) {
+    return this.get(`${prefix}?$search=${where}`);
   }
 
   findOne(prefix: string, id: string) {

@@ -1,5 +1,7 @@
-import { Admin, HttpService } from 'src/app/shared/http.service';
+import { HttpService, User } from 'src/app/shared/http.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { USERS_URL } from 'src/app/shared/constants';
+import { Role } from 'src/app/shared/helpers';
 
 @Component({
   selector: 'app-selector',
@@ -7,8 +9,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./selector.component.scss'],
 })
 export class SelectorComponent implements OnInit {
-  public admins: Admin[] = [];
-  @Output() admin: EventEmitter<Admin> = new EventEmitter<Admin>();
+  public admins: User[] = [];
+  @Output() admin: EventEmitter<User> = new EventEmitter<User>();
 
   constructor(private httpService: HttpService) {}
 
@@ -17,14 +19,16 @@ export class SelectorComponent implements OnInit {
   }
 
   find() {
-    this.httpService.find('admin').subscribe((admins) => {
-      this.admins = admins;
-    });
+    this.httpService
+      .findWhere(USERS_URL, `role=!${Role.USER}`)
+      .subscribe((admins) => {
+        this.admins = admins;
+      });
   }
 
   select(id: string) {
     console.log(id);
-    this.httpService.findOne('admin', id).subscribe((admin) => {
+    this.httpService.findOne(USERS_URL, id).subscribe((admin) => {
       this.admin.emit(admin);
     });
   }

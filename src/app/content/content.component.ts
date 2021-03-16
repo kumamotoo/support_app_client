@@ -1,6 +1,6 @@
 import { AfterContentInit, Component, EventEmitter } from '@angular/core';
 import { EventsEmitter } from '../shared/events.service';
-import { clearStorage, getPerson } from '../shared/helpers';
+import { clearStorage, getUser } from '../shared/helpers';
 
 @Component({
   selector: 'app-content',
@@ -11,7 +11,7 @@ export class ContentComponent implements AfterContentInit {
   public breadcrumbsId: string;
   public breadcrumbsTitle: string;
   public breadcrumbsRoute: string;
-  public person: any;
+  public user: any;
 
   constructor(private eventEmitter: EventsEmitter) {}
 
@@ -25,7 +25,7 @@ export class ContentComponent implements AfterContentInit {
       (route: string) => (this.breadcrumbsRoute = route)
     );
 
-    this.person = getPerson();
+    this.user = getUser();
   }
 
   logout() {

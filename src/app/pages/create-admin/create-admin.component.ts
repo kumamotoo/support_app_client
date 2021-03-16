@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ADMINS_URL } from 'src/app/shared/constants';
-import { Admin, HttpService } from 'src/app/shared/http.service';
+import { USERS_URL } from 'src/app/shared/constants';
+import {  HttpService, User } from 'src/app/shared/http.service';
 import { AlertService } from './../../components/alert/alert.service';
 import { EventsEmitter } from './../../shared/events.service';
 
@@ -11,7 +11,7 @@ import { EventsEmitter } from './../../shared/events.service';
   styleUrls: ['./create-admin.component.scss'],
 })
 export class CreateAdminComponent implements OnInit {
-  public admin: Admin;
+  public admin: User;
   public form: FormGroup;
 
   constructor(
@@ -43,7 +43,7 @@ export class CreateAdminComponent implements OnInit {
       password: controls.password.value,
       role: controls.role.value,
     };
-    this.httpService.create(ADMINS_URL, body).subscribe(
+    this.httpService.create(USERS_URL, body).subscribe(
       () => {
         this.alertService.success(
           `Admin ${body.name} has successfully created`

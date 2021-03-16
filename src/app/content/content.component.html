@@ -11,7 +11,7 @@
     </div>
     <div class="chat-settings">
       <a [routerLink]="['/profile']">
-        <span> {{ person.name }} </span>
+        <span> {{ user.name | titlecase }} </span>
       </a>
       <a (click)="logout()">
         <i class="material-icons"> login </i>

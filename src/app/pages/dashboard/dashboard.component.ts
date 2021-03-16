@@ -4,7 +4,7 @@ import { REQUEST_URL } from 'src/app/shared/constants';
 import { EventsEmitter } from 'src/app/shared/events.service';
 import { AlertService } from 'src/app/components/alert/alert.service';
 import { HttpService } from '../../shared/http.service';
-import { getPerson, Role } from 'src/app/shared/helpers';
+import { getUser, isRoleMatch, Role } from 'src/app/shared/helpers';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +13,7 @@ import { getPerson, Role } from 'src/app/shared/helpers';
 })
 export class DashboardComponent implements OnInit {
   public from: FormGroup;
-  public person: any;
+  public user: any;
   public isUser: boolean = false;
 
   constructor(
@@ -26,8 +26,9 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.person = getPerson();
-    if (this.person.role === Role.USER) {
+    this.user = getUser();
+
+    if (isRoleMatch(this.user, Role.USER)) {
       this.isUser = true;
     }
     this.from = new FormGroup({
@@ -39,14 +40,15 @@ export class DashboardComponent implements OnInit {
   onSubmit() {
     if (this.isUser) {
       const { controls } = this.from;
+
       const data = {
         title: controls.title.value,
         description: controls.description.value,
-        creator: this.person.id,
+        creator: this.user.id,
       };
 
       this.httpService.create(REQUEST_URL, data).subscribe(
-        (d) => {
+        () => {
           this.alertService.success(`Your request has successfully created`);
           this.from.reset();
         },

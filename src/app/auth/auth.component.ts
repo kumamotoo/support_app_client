@@ -4,7 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { HttpService } from 'src/app/shared/http.service';
 import { AlertService } from './../components/alert/alert.service';
-import { setPerson, setToken } from '../shared/helpers';
+import { setUser, setToken } from '../shared/helpers';
 
 @Component({
   selector: 'app-auth',
@@ -60,7 +60,7 @@ export class AuthComponent implements OnInit {
         if (data.access_token) {
           this.token.emit(data.access_token);
           setToken(data.access_token);
-          setPerson(data);
+          setUser(data);
           this.router.navigate(['/']);
         }
       },

@@ -1,10 +1,10 @@
 import { REQUEST_URL, ROOMS_URL, USERS_URL } from '../../shared/constants';
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { HttpService } from 'src/app/shared/http.service';
-import { Request, Admin } from '../../shared/http.service';
+import { HttpService, User } from 'src/app/shared/http.service';
+import { Request } from '../../shared/http.service';
 import { EventsEmitter } from 'src/app/shared/events.service';
 import { AlertService } from './../../components/alert/alert.service';
-import { getPerson, Role, sortByDate } from 'src/app/shared/helpers';
+import { getUser, Role, sortByDate } from 'src/app/shared/helpers';
 import { FormGroup, FormControl } from '@angular/forms';
 
 const initialSearch = {
@@ -22,7 +22,7 @@ const initialSearch = {
 export class RequestsComponent implements OnInit {
   public requests: Request[] = [];
   public request: Request;
-  public admin: Admin;
+  public admin: User;
   public searchInputs: FormGroup;
   public showField = { ...initialSearch };
 
@@ -48,13 +48,13 @@ export class RequestsComponent implements OnInit {
   }
 
   find() {
-    if (getPerson().role !== Role.USER) {
+    if (getUser().role !== Role.USER) {
       this.httpService.find(REQUEST_URL).subscribe((requests) => {
         this.requests = requests;
       });
     } else {
       this.httpService
-        .find(`${REQUEST_URL}/${USERS_URL}/${getPerson().id}`)
+        .find(`${REQUEST_URL}/${USERS_URL}/${getUser().id}`)
         .subscribe((requests) => {
           this.requests = requests;
         });
@@ -62,7 +62,7 @@ export class RequestsComponent implements OnInit {
   }
 
   findOne(id: string) {
-    if (getPerson().role !== Role.USER) {
+    if (getUser().role !== Role.USER) {
       this.eventsEmitter.id.emit(id);
       this.admin = null;
       this.httpService.findOne(REQUEST_URL, id).subscribe((request) => {
@@ -74,7 +74,7 @@ export class RequestsComponent implements OnInit {
   createRoom(data: any) {
     this.httpService.create(ROOMS_URL, data).subscribe((room) => {});
     this.httpService.deleteOne(REQUEST_URL, this.request.id).subscribe(
-      (d) => {
+      () => {
         this.alertServive.success(`Room has successfully created`);
         this.requests = this.requests.filter(
           (request) => request.id !== this.request.id

@@ -3,7 +3,7 @@
     <div class="title">
       <h3>
         <strong>Title: </strong> {{ room?.title | slice: 0:100 }}
-        {{ room?.title.length > 100 && "..." }}
+        <span *ngIf="room?.title.length > 100">...</span>
       </h3>
     </div>
     <div class="search">
@@ -15,7 +15,7 @@
     <div class="chat">
       <ul #scroll *ngIf="messages.length; else noMessages">
         <li
-          [class.isMe]="message.sender === person?.id"
+          [class.isMe]="message.sender === user?.id"
           *ngFor="let message of messages"
         >
           {{ message.message }}
@@ -81,7 +81,7 @@
           </p>
         </div>
       </div>
-      <div class="buttons" *ngIf="person.role !== 'user'">
+      <div class="buttons" *ngIf="user.role !== 'user'">
         <button class="btn" (click)="close()">
           {{ room.open ? "Close" : "Reopen" }}
         </button>

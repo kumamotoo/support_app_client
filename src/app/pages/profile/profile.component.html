@@ -3,11 +3,27 @@
     <alert></alert>
     <header>
       <div class="profile-image">
-        <img [src]="person?.image" />
+        <img
+          [src]="
+            user?.image ||
+            'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png'
+          "
+        />
+        <div>
+          <i class="material-icons" (click)="fileInput.click()">
+            add_a_photo
+          </i>
+          <input
+            style="display: none"
+            type="file"
+            (change)="onUpload($event)"
+            #fileInput
+          />
+        </div>
       </div>
       <div class="profile-main-info">
-        <h3>{{ person?.name }}</h3>
-        <p>{{ person?.email }} - {{ person.role }}</p>
+        <h3>{{ user?.name }}</h3>
+        <p>{{ user?.email }} - {{ user.role }}</p>
       </div>
     </header>
     <form class="card" [formGroup]="form" (ngSubmit)="save()">
@@ -21,10 +37,10 @@
           <strong>Email: </strong>
           <input type="text" formControlName="email" />
         </li>
-        <li><strong>Role: </strong> {{ person?.role }}</li>
+        <li><strong>Role: </strong> {{ user?.role }}</li>
         <li>
           <strong>Password: </strong>
-          <input formControlName="password" [type]="type" />
+          <input formControlName="password" type="password" />
           <span class="material-icons"> visbility </span>
         </li>
       </ul>

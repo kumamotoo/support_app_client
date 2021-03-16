@@ -7,7 +7,7 @@ import { HttpService } from '../../shared/http.service';
 import { EventsEmitter } from 'src/app/shared/events.service';
 import { Room } from 'src/app/shared/http.service';
 import { ROOMS_URL, USERS_URL } from 'src/app/shared/constants';
-import { Role, getPerson, sortByDate } from 'src/app/shared/helpers';
+import { Role, getUser, sortByDate, isRoleMatch } from 'src/app/shared/helpers';
 
 const initialSearch = {
   title: false,
@@ -21,7 +21,7 @@ const initialSearch = {
 })
 export class RoomsComponent implements OnInit {
   public rooms: Room[] = [];
-  public person: any;
+  public user: any;
   public searchInputs: FormGroup;
   public showField = { ...initialSearch };
   constructor(
@@ -33,9 +33,9 @@ export class RoomsComponent implements OnInit {
   ngOnInit(): void {
     this.eventsEmitter.route.emit('/rooms');
     this.eventsEmitter.title.emit('Rooms');
-    this.person = getPerson();
+    this.user = getUser();
 
-    if (this.person.role !== Role.USER) {
+    if (!isRoleMatch(this.user, Role.USER)) {
       this.find();
     } else {
       this.findRoomsByUser();
@@ -57,7 +57,7 @@ export class RoomsComponent implements OnInit {
 
   findRoomsByUser() {
     this.httpService
-      .findOne(`${ROOMS_URL}/${USERS_URL}`, this.person.id)
+      .findOne(`${ROOMS_URL}/${USERS_URL}`, this.user.id)
       .subscribe((userRooms) => {
         this.rooms = userRooms;
       });

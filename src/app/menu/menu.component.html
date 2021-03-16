@@ -27,7 +27,7 @@
           <i class="material-icons"> mark_chat_unread </i>Requests
         </a>
       </li>
-      <li routerLinkActive="active" *ngIf="person.role !== 'user'">
+      <li routerLinkActive="active" *ngIf="user.role !== 'user'">
         <a [routerLink]="['/users']">
           <i class="material-icons"> people </i>Users
         </a>
@@ -43,7 +43,7 @@
         </a>
       </li>
       <li class="more-item" *ngIf="more" routerLinkActive="active">
-        <a [routerLink]="['/create']" *ngIf="person.role !== 'user'">
+        <a [routerLink]="['/create']" *ngIf="user.role !== 'user'">
           <i class="material-icons"> add_circle </i>Create Admin
         </a>
       </li>

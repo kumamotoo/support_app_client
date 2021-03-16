@@ -1,12 +1,12 @@
-import { Admin, User } from './http.service';
+import { User } from './http.service';
 
-export const getPerson = () => JSON.parse(localStorage.getItem('person'));
+export const getUser = () => JSON.parse(localStorage.getItem('user'));
 export const getToken = () => localStorage.getItem('token');
 export const setToken = (token: string) => localStorage.setItem('token', token);
-export const setPerson = (person: Admin | User) =>
-  localStorage.setItem('person', JSON.stringify(person));
+export const setUser = (user: User) =>
+  localStorage.setItem('user', JSON.stringify(user));
 export const deleteToken = () => localStorage.removeItem('token');
-export const deletePerson = () => localStorage.setItremoveItemem('person');
+export const deleteUser = () => localStorage.setItremoveItemem('user');
 export const clearStorage = () => localStorage.clear();
 
 export enum Role {
@@ -21,3 +21,8 @@ export const sortByDate = (controls: any) => {
     ? controls.createdAt.setValue('DESC')
     : controls.createdAt.setValue('ASC');
 };
+
+export const isMatchPasswords = (password: string, comparedPassword: string) =>
+  password === comparedPassword;
+
+export const isRoleMatch = (user: any, role: Role) => user?.role === role;

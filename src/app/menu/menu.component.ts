@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getPerson } from './../shared/helpers';
+import { getUser } from './../shared/helpers';
 
 @Component({
   selector: 'app-menu',
@@ -9,10 +9,10 @@ import { getPerson } from './../shared/helpers';
 export class MenuComponent implements OnInit {
   public more: boolean = false;
   public icon: string = 'expand_more';
-  public person;
+  public user;
 
   ngOnInit(): void {
-    this.person = getPerson();
+    this.user = getUser();
   }
 
   showMore() {
